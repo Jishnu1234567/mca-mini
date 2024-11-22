@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crime Prediction & Rehabilitation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .btn {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    .inmate-list {
+      margin-top: 30px;
+    }
+    .inmate-list table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .inmate-list th,
+    .inmate-list td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    .inmate-list th {
+      background-color: #f2f2f2;
+    }
+    .alert {
+      color: red;
+      font-weight: bold;
+    }
+    nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            background-color: #2980b9;
+            border-radius: 5px;
+        }
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="component-home.component.html">Home</a>
+        <a href="component-inmates.component.html">Inmate Records</a>
+        <a href="/appoinment.html">Visitors appointments</a>
+        <a href="component-gaurds.component.html">Staff Portal</a>
+        <a href="crime-prediction.component.html">Crime Prediction</a>
+        <a href="#">Logout</a>
+    </nav>
+  <div class="container">
+    <h1>Crime Prediction & Rehabilitation Assignment</h1>
+    <section>
+      <h2>Predict Crime Risk</h2>
+      <form id="crimePredictionForm">
+        <div class="form-group">
+          <label for="inmateId">Inmate ID</label>
+          <input type="text" id="inmateId" name="inmateId" required>
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+          <label for="crimeType">Crime Type</label>
+          <select id="crimeType" name="crimeType" required>
+            <option value="" disabled selected>Select Crime Type</option>
+            <option value="Theft">Theft</option>
+            <option value="Assault">Assault</option>
+            <option value="Fraud">Fraud</option>
+            <option value="Drug Trafficking">Drug Trafficking</option>
+            <option value="Murder">Murder</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pastOffenses">Past Offenses</label>
+          <input type="number" id="pastOffenses" name="pastOffenses" required>
+        </div>
+        <div class="form-group">
+          <label for="violentIncidents">Violent Incidents</label>
+          <input type="number" id="violentIncidents" name="violentIncidents" value="0">
+        </div>
+        <button type="button" class="btn" onclick="predictRisk()">Predict Crime Risk</button>
+        <div id="riskMessage" class="alert" style="display: none;"></div>
+      </form>
+    </section>
+    <section class="inmate-list">
+      <h2>Assign High-Risk Inmates to Rehabilitation Programs</h2>
+      <form id="rehabAssignmentForm">
+        <div class="form-group">
+          <label for="rehabInmateId">Inmate ID</label>
+          <input type="text" id="rehabInmateId" name="rehabInmateId" required>
+        </div>
+        <div class="form-group">
+          <label for="rehabProgram">Rehabilitation Program</label>
+          <select id="rehabProgram" name="rehabProgram" required>
+            <option value="" disabled selected>Select Program</option>
+            <option value="Anger Management">Anger Management</option>
+            <option value="Drug Counseling">Drug Counseling</option>
+            <option value="Educational Program">Educational Program</option>
+          </select>
+        </div>
+        <button type="button" class="btn" onclick="assignRehab()">Assign to Program</button>
+      </form>
+      <h3>Inmates Assigned to Rehabilitation Programs</h3>
+      <table id="inmateTable">
+        <thead>
+          <tr>
+            <th>Inmate ID</th>
+            <th>Program</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <script>
+    function predictRisk() {
+      const inmateId = document.getElementById('inmateId').value;
+      const age = parseInt(document.getElementById('age').value);
+      const pastOffenses = parseInt(document.getElementById('pastOffenses').value);
+      const violentIncidents = parseInt(document.getElementById('violentIncidents').value);
+      
+      let riskScore = 0;
+      let riskLevel = '';
+
+      // Calculate risk score
+      if (age < 25) riskScore += 2;
+      if (pastOffenses > 3) riskScore += 2;
+      if (violentIncidents > 1) riskScore += 2;
+
+      // Determine risk level
+      if (riskScore >= 4) {
+        riskLevel = 'High Risk';
+      } else {
+        riskLevel = 'Low Risk';
+      }
+
+      // Show risk message
+      const riskMessage = document.getElementById('riskMessage');
+      riskMessage.style.display = 'block';
+      riskMessage.innerText = `Predicted Risk Level for Inmate ID ${inmateId}: ${riskLevel}`;
+      
+      // If high risk, populate rehab inmate ID
+      if (riskLevel === 'High Risk') {
+        document.getElementById('rehabInmateId').value = inmateId;
+      }
+    }
+
+    function assignRehab() {
+      const inmateId = document.getElementById('rehabInmateId').value;
+      const program = document.getElementById('rehabProgram').value;
+      
+      if (!inmateId || !program) {
+        alert('Please provide both Inmate ID and Program');
+        return;
+      }
+
+      const tbody = document.querySelector('#inmateTable tbody');
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${inmateId}</td><td>${program}</td>`;
+      tbody.appendChild(row);
+      
+      // Reset the form
+      document.getElementById('rehabAssignmentForm').reset();
+    }
+  </script>
+</body>
+</html>

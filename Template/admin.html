@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prison Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2c3e50;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            background-color: #2980b9;
+            border-radius: 5px;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #ecf0f1;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+            background-color: #ffffff;
+        }
+        .feature-box {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+        }
+        .feature-box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .feature-box p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Prison Management System</h1>
+    </header>
+
+    <nav>
+      
+        <a href="/">Home</a>
+        <a href="{% url 'admin_add_inmate_page' %}">Inmate Add</a>
+        <a href="{% url 'admin_inmate_list_page' %}">Inmate Records</a>
+        <a href="{% url 'admin_visit_history_page' %}">Visitors appointments</a>
+        <a href="{% url 'admin_guard_register_page' %}">Staff Portal</a>
+        <!-- <a href="crime-prediction.component.html">Crime Prediction</a>  -->
+        <a href="{% url 'admin_inmate_report_page' %}">Inmate Reports</a>
+        <a href="{% url 'admin_inmate_work_page' %}">Inmate Work</a>
+        
+       
+       <!--  <a href="{% url 'logoutpage' %}">Logout</a> -->
+      
+<!--         <a href="{% url 'adminloginpage' %}">LogIn</a>
+ -->        
+    </nav>
+
+    <div class="hero">
+        <h1>Welcome to the Prison Management System</h1>
+       <!-- <p>Efficient and secure management of prison operations, inmate records, visitor tracking, and more.</p>-->
+    </div>
+
+   <!--  <section class="features">
+        <div class="feature-box">
+            <h3>Inmate Records</h3>
+            <p>Manage inmate profiles, history, sentence information, and behavior reports.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Visitor Management</h3>
+            <p>Track visitors, schedule appointments, and manage visitor logs easily.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Staff Portal</h3>
+            <p>Allow staff to log in, view schedules, and manage daily tasks efficiently.</p>
+        </div>
+    </section>
+ -->
+    <footer>
+        <p>&copy; 2024 Prison Management System</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Violent Activity - Prison Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .action-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .report-violence-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        label {
+            width: 30%;
+            font-weight: bold;
+        }
+        select, input, textarea {
+            width: 65%;
+            padding: 8px;
+        }
+        textarea {
+            height: 80px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        .delete-btn {
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+            background-color: #e74c3c;
+            border-radius: 5px;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>Report Violent Activity</h1>
+    </div>
+
+    <div class="container">
+        <h2>Report Violence</h2>
+
+        <!-- Report violence form -->
+        <form action="{% url 'report_page' %}" method = "post" class="report-violence-form" >
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="inmate-name">Inmate Name:</label>
+              
+                <select id="inmate-name" name="inmate-name" required>
+                    {% for i in inmates %}
+                   <!--  <option value="">Select Inmate</option> -->
+                   
+                   
+                  
+                    <option value="{{i.name}},{{i.id}}">{{i.name}}</option>
+                   
+               
+                    
+                    <!-- More inmate names here -->
+                    {% endfor %}
+                </select>
+             
+            </div>
+           
+            <div class="form-group">
+                <label for="incident-description">Incident Description:</label>
+                <textarea id="incident-description"  name="desc" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="incident-date">Incident Date:</label>
+                <input type="date" id="incident-date"  name="date" required>
+            </div>
+            <input type="hidden" id="incident-date"  name="gaurd_name" value="{{ user.username }}" >
+
+            <div class="action-buttons">
+                <button type="submit">Report Violence</button>
+            </div>
+        </form>
+
+        <!-- Reported incidents list -->
+        <h2>Reported Incidents</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Inmate Name</th>
+                    <th>Incident Description</th>
+                    <th>Date</th>
+                    <th>Reported By</th>
+                    <th>Actions</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in report %}
+                <!-- Sample data for reported incidents -->
+                <tr>
+                 
+                    <td>{{i.name}}</td>
+                    <td>{{i.desc}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.reported_by}}</td>
+                    <td>
+                        <a href="{% url 'delete_report_page' %}?id={{i.id}}" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+               {% endfor %}
+               
+                <!-- More incidents here -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

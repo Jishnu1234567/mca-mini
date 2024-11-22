@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Management - Prison Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2c3e50;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            background-color: #2980b9;
+            border-radius: 5px;
+        }
+        .container {
+            padding: 30px;
+            margin: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 16px;
+            color: #333;
+        }
+        input[type="text"], input[type="date"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Prison Management System</h1>
+    </header>
+
+   <!-- <nav>
+        <a href="#">Home</a>
+        <a href="#">Inmate Records</a>
+        <a href="#">Visitor Management</a>
+        <a href="#">Staff Portal</a>
+        <a href="#">Reports</a>
+        <a href="#">Logout</a>
+    </nav>-->
+
+    <div class="container">
+        <h2>Visitor Management</h2>
+      <form action="{% url 'visitors_history_page' %}" method="post">
+        {% csrf_token %}
+            <div class="form-group">
+                <label for="visitorName">Visitor Name</label>
+                <input type="text" id="visitorName" name="username" placeholder="Enter Visitor's Name" value="{{username}}">
+            </div>
+            <div class="form-group">
+                <label for="visitorID">Visitor ID</label>
+                <input type="text" id="visitorID" name="ivisitor" placeholder="Enter Visitor ID or Identification Number" >
+            </div>
+            <div class="form-group">
+                <label for="visitorEmail">Visitor Email</label>
+                <input type="email" id="visitorEmail" name="email" placeholder="Enter Visitor Email" >
+            </div>
+            <div class="form-group">
+                <label for="inmateID">Inmate Name</label>
+                <input type="text" id="inmateID" name="iname" placeholder="Enter the Inmate Name for the visit" value="{{name}}">
+            </div>
+            <div class="form-group">
+                <label for="relationship">Relationship to Inmate</label>
+                <input type="text" id="relationship" name="relationship" placeholder="E.g., Friend, Family, Lawyer" >
+            </div>
+            <div class="form-group">
+                <label for="visitDate">Visit Date</label>
+                <input type="date" id="visitDate" name="visitdate" >
+            </div>
+            <div class="form-group">
+                <label for="visitTime">Visit Time</label>
+                <input type="time" id="visitTime" name="visittime" >
+            </div>
+            <div class="form-group">
+                <label for="visitPurpose">Purpose of Visit</label>
+                <input type="text" id="visitPurpose" name="purpose" placeholder="E.g., Legal Consultation, Personal Visit" >
+            </div>
+           <button type="submit">Submit Visitor Record</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inmate Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .inmate-card {
+      display: flex;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .inmate-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+    .inmate-details {
+      flex-grow: 1;
+    }
+    .inmate-details h3 {
+      margin: 0;
+      color: #333;
+    }
+    .inmate-details p {
+      margin: 5px 0;
+      color: #777;
+    }
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: background-color 0.3s;
+    }
+    .btn-view {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .btn-edit {
+      background-color: #f0ad4e;
+      color: white;
+    }
+    .btn-view:hover {
+      background-color: #45a049;
+    }
+    .btn-edit:hover {
+      background-color: #ec971f;
+    }
+    nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            background-color: #2980b9;
+            border-radius: 5px;
+        }
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="component-inmates.component.html">Inmate Records</a>
+    </nav>
+
+  <div class="container">
+    <h1>Inmate Details</h1>
+    
+    <!-- Inmate 1 -->
+    <div class="inmate-card">
+      <img src="inmate1.jpg" alt="Inmate Image">
+      <div class="inmate-details">
+        <h3>John Doe</h3>
+        <p>Inmate ID: 12345</p>
+        <p>Crime: Theft</p>
+      </div>
+      <button class="btn btn-view" onclick="viewDetails(12345)">View Details</button>
+      <button class="btn btn-edit" onclick="editInmate(12345)">Edit</button>
+    </div>
+
+    <!-- Inmate 2 -->
+    <div class="inmate-card">
+      <img src="inmate2.jpg" alt="Inmate Image">
+      <div class="inmate-details">
+        <h3>Jane Smith</h3>
+        <p>Inmate ID: 67890</p>
+        <p>Crime: Fraud</p>
+      </div>
+      <button class="btn btn-view" onclick="viewDetails(67890)">View Details</button>
+      <button class="btn btn-edit" onclick="editInmate(67890)">Edit</button>
+    </div>
+
+    <!-- Inmate 3 -->
+    <div class="inmate-card">
+      <img src="inmate3.jpg" alt="Inmate Image">
+      <div class="inmate-details">
+        <h3>Mike Johnson</h3>
+        <p>Inmate ID: 54321</p>
+        <p>Crime: Assault</p>
+      </div>
+      <button class="btn btn-view" onclick="viewDetails(54321)">View Details</button>
+      <button class="btn btn-edit" onclick="editInmate(54321)">Edit</button>
+    </div>
+
+    <!-- More inmate cards can go here -->
+  </div>
+
+  <script>
+    function viewDetails(inmateId) {
+      alert('Viewing details for inmate ID: ' + inmateId);
+      // Here, you would normally navigate to another page or load details dynamically
+      // Example: window.location.href = '/inmate-details/' + inmateId;
+    }
+
+    function editInmate(inmateId) {
+      alert('Editing inmate ID: ' + inmateId);
+      // Here, you would normally navigate to an edit page or load edit form dynamically
+      // Example: window.location.href = '/edit-inmate/' + inmateId;
+    }
+  </script>
+
+</body>
+</html>

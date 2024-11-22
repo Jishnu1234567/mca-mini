@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prison Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .action-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .action-buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            color: white;
+            background-color: #3498db;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .status-accepted {
+            color: #27ae60;
+        }
+        .status-rejected {
+            color: #e74c3c;
+        }
+        .status-pending {
+            color: #f39c12;
+        }
+        nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+
+  }
+  button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+        .edit-btn {
+            background-color: #f39c12;
+        }
+        .edit-btn:hover {
+            background-color: #e67e22;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            background-color: #2980b9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="navbar">
+        <h1>Prison Management System</h1>
+    </div>
+    <nav>
+      
+        <a href="/">Home</a>
+        <a href="{% url 'admin_inmate_list_page' %}">Inmate Records</a>
+        <a href="{% url 'admin_visit_history_page' %}">Visitors appointments</a>
+        <a href="{% url 'admin_guard_register_page' %}">Staff Portal</a>
+        <!-- <a href="crime-prediction.component.html">Crime Prediction</a>  -->
+        <a href="{% url 'admin_inmate_report_page' %}">Inmate Reports</a>
+        <a href="{% url 'admin_inmate_work_page' %}">Inmate Work</a>
+        <a href="{% url 'admin_add_inmate_page' %}">Inmate Add</a>
+       
+       <!--  <a href="{% url 'logoutpage' %}">Logout</a> -->
+    
+<!--         <a href="{% url 'adminloginpage' %}">LogIn</a>
+ -->        
+    </nav>
+
+    <div class="container">
+        <h2>Booking Requests</h2>
+
+    <!--     <div class="action-buttons">
+            <a href="{% url 'inmate_list_page' %}">Book a New Visit</a>
+            <a href="/user-profile.component.html">View Profile</a> 
+        </div> -->
+    
+        <!-- In admin_visitors_request.html -->
+<table>
+    <thead>
+        <tr>
+            <th>Visitor Name</th>
+            <th>Inmate Name</th>
+            <th>Visit Date</th>
+            <th>Visit Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if history %}
+            {% for i in history %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.inmate_name }}</td>
+                    <td>{{ i.date }}</td>
+                    <td>{{ i.time }}</td>
+                    <td class="{% if i.status == 'ACCEPTED' %}status-accepted{% elif i.status == 'REJECTED' %}status-rejected{% else %}status-pending{% endif %}">
+                        {{ i.status }}
+                    </td>
+                    {% if i.status == 'PENDING' %}
+                    <td>
+                        <form action="{% url 'admin_visit_history_page' %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="visitor_id" value="{{ i.id }}">
+                            <textarea name="admin_message" placeholder="Add a message">{{ i.admin_message }}</textarea><br>
+                            <button type="submit" name="action" value="accept" class="edit-btn">Accept</button>
+                            <button type="submit" name="action" value="reject" class="delete-btn">Reject</button>
+                        </form>
+                    </td>
+                    {% else %}
+                    <td>{{ i.admin_message }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center;">No booking requests available.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+    
+</table>
+
+    </div>
+
+</body>
+</html>

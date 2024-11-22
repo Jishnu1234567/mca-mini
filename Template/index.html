@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prison Management System - Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background: url('https://cdn3.vectorstock.com/i/1000x1000/27/87/cartoon-criminal-in-jail-vector-21352787.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .login-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #34495e;
+            color: white;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s ease;
+            border: none;
+        }
+
+        .login-btn:hover {
+            background-color: #2c3e50;
+            transform: translateY(-3px);
+        }
+
+        .login-btn:focus {
+            outline: none;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            width: 100%;
+            color: white;
+            font-size: 14px;
+            z-index: 2;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h1>Prison Management System</h1>
+
+        <a href="{% url 'adminloginpage' %}" class="login-btn">Admin Login</a>
+        <a href="{% url 'guardloginpage' %}" class="login-btn">Guards Login</a>
+        <a href="{% url 'userloginpage' %}" class="login-btn">Visitor's Login</a>
+    </div>
+
+    <footer>
+        &copy; 2024 Prison Management System. <a href="#">Privacy Policy</a>
+    </footer>
+
+</body>
+</html>

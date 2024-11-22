@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prison Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .action-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .action-buttons a {
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            color: white;
+            background-color: #3498db;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .status-accepted {
+            color: #27ae60;
+        }
+        .status-rejected {
+            color: #e74c3c;
+        }
+        .status-pending {
+            color: #f39c12;
+        }
+        nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+    </style>
+</head>
+<body>
+    
+
+    <div class="navbar">
+        <h1>Prison Management System</h1>
+    </div>
+
+    <div class="container">
+        <h2>Booking Visit History</h2>
+
+        <div class="action-buttons">
+            <a href="{% url 'inmate_list_page' %}">Book a New Visit</a>
+            <!-- <a href="/user-profile.component.html">View Profile</a> -->
+        </div>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Visitor Name</th>
+                    <th>Inmate Name</th>
+                    <th>Visit Date</th>
+                    <th>Visit Time</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            {% for i in history %}
+            <tbody>
+                <!-- Sample booking history data -->
+            
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.inmate_name}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.time}}</td>
+                    <td class="{% if i.status == 'ACCEPTED' %}status-accepted{% elif i.status == 'REJECTED' %}status-rejected{% else %}status-pending{% endif %}">
+                        {{ i.status }}
+                    </td>
+                    <td>{{i.admin_message}}</td>
+                </tr>
+               
+              
+                <!-- More booking history data would go here -->
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

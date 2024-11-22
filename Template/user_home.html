@@ -1,0 +1,72 @@
+<div class="user-container">
+    <header>
+      <h1>Welcome to the Prison Management System</h1>
+      <p>User Portal</p>
+      <style>
+        .user-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  section {
+    margin: 20px 0;
+  }
+  
+  footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+      </style>
+    </header>
+  
+    <nav>
+      <ul>
+        <li><a href="user-profile.component.html">My Profile</a></li>
+        <li><a href="component-visitors.component.html">Book a Visit</a></li>
+        <li><a href="/visit-history.html">Visitation History</a></li>
+        <li><a routerLink="/prison-policies">Prison Policies</a></li>
+        <li><a routerLink="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  
+    <section>
+      <h2>Dashboard</h2>
+      <p>Manage your visits and stay updated on prison policies.</p>
+    </section>
+  
+    <footer>
+      <p>&copy; 2024 Prison Management System</p>
+    </footer>
+  </div>
+  

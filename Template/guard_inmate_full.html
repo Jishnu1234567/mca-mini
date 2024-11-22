@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inmates List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .inmate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .inmate-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .inmate-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .inmate-card h3 {
+      margin: 10px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .inmate-card .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .inmate-card .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Inmates List</h1>
+  
+    <div class="inmate-grid">
+      <!-- Inmate 1 -->
+      {% for i in inmates %}
+      <form action="{% url 'guard_single_inmate_page' %}?id={{i.id}}" method="post">
+        {% csrf_token %}
+      <div class="inmate-card">
+        <img src="{{i.img.url}}" alt="Inmate Image">
+        <h3>{{i.name}}</h3>
+        <input type="text" hidden name="{{i.id}}">
+        <button class="btn" type="submit">View Details</button>
+      </div>
+    </form>
+      {% endfor %}
+    </div>
+ 
+  </div>
+
+</body>
+
+</html>
